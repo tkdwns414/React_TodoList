@@ -7,27 +7,27 @@ export default function TodoList(props) {
   ]);
   const [curId, setCurId] = useState(2);
 
-  const AddTodo = () => {
+  const addTodo = () => {
     setTodos([...todos, { id: curId, text: value, checked: false }]);
     setCurId(curId + 1);
     setValue("");
   };
 
-  const CompleteTodo = (id) => {
+  const completeTodo = (id) => {
     let index = todos.findIndex((x) => x.id === id);
     let todosCopy = [...todos];
     if (index > -1) todosCopy[index].checked = true;
     setTodos(todosCopy);
   };
 
-  const DeleteTodo = (id) => {
+  const deleteTodo = (id) => {
     let index = todos.findIndex((x) => x.id === id);
     let todosCopy = [...todos];
     if (index > -1) todosCopy.splice(index, 1);
     setTodos(todosCopy);
   };
 
-  const UpdateTodo = (id, newValue) => {
+  const updateTodo = (id, newValue) => {
     let index = todos.findIndex((x) => x.id === id);
     let todosCopy = [...todos];
     if (index > -1) todosCopy[index].text = newValue;
@@ -43,14 +43,14 @@ export default function TodoList(props) {
           <li key={todo.id}>
             <Todo
               todo={todo}
-              onDelete={DeleteTodo}
-              onComplete={CompleteTodo}
-              onUpdate={UpdateTodo}
+              onDelete={deleteTodo}
+              onComplete={completeTodo}
+              onUpdate={updateTodo}
             />
           </li>
         ))}
       </ul>
-      <TodoForm value={value} onChange={setValue} onClick={AddTodo} />
+      <TodoForm value={value} onChange={setValue} onClick={addTodo} />
     </>
   );
 }
